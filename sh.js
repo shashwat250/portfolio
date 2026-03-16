@@ -1,123 +1,159 @@
-/* SMOOTH SCROLL FOR NAV LINKS */
+/* =========================
+   MOBILE NAVBAR (HAMBURGER)
+   ========================= */
 
-const navLinks = document.querySelectorAll("nav a")
+const navbar = document.querySelector(".navbar");
+const nav = document.querySelector("nav");
 
-navLinks.forEach(link => {
+/* create hamburger button dynamically */
+const menuBtn = document.createElement("div");
+menuBtn.innerHTML = "☰";
+menuBtn.style.fontSize = "24px";
+menuBtn.style.cursor = "pointer";
+menuBtn.style.display = "none";
+navbar.appendChild(menuBtn);
 
-link.addEventListener("click", function(e){
+/* toggle menu */
+menuBtn.addEventListener("click", () => {
+    nav.classList.toggle("show-menu");
+});
 
-e.preventDefault()
-
-const target = document.querySelector(this.getAttribute("href"))
-
-target.scrollIntoView({
-behavior: "smooth"
-})
-
-})
-
-})
-
-
-
-/* SCROLL REVEAL ANIMATION */
-
-const sections = document.querySelectorAll(".section")
-
-function revealSections(){
-
-sections.forEach(section => {
-
-const sectionTop = section.getBoundingClientRect().top
-const windowHeight = window.innerHeight
-
-if(sectionTop < windowHeight - 100){
-
-section.style.opacity = "1"
-section.style.transform = "translateY(0)"
-
+/* show hamburger on small screens */
+function handleMenu() {
+    if (window.innerWidth <= 768) {
+        menuBtn.style.display = "block";
+        nav.style.display = "none";
+    } else {
+        menuBtn.style.display = "none";
+        nav.style.display = "flex";
+    }
 }
 
-})
-
-}
-
-window.addEventListener("scroll", revealSections)
+handleMenu();
+window.addEventListener("resize", handleMenu);
 
 
-/* INITIAL HIDDEN STATE */
+/* =========================
+   SMOOTH SCROLL NAVIGATION
+   ========================= */
 
-sections.forEach(section => {
+document.querySelectorAll("nav a").forEach(link => {
 
-section.style.opacity = "0"
-section.style.transform = "translateY(60px)"
-section.style.transition = "all 0.8s ease"
+    link.addEventListener("click", function(e){
 
-})
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute("href"));
+
+        target.scrollIntoView({
+            behavior:"smooth"
+        });
+
+        /* close mobile menu after click */
+        if(window.innerWidth <= 768){
+            nav.style.display = "none";
+        }
+
+    });
+
+});
 
 
+/* =========================
+   ACTIVE NAV LINK ON SCROLL
+   ========================= */
 
-/* NAVBAR BACKGROUND CHANGE */
-
-const navbar = document.querySelector(".navbar")
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
 
 window.addEventListener("scroll", () => {
 
-if(window.scrollY > 100){
+    let current = "";
 
-navbar.style.background = "#000"
-navbar.style.boxShadow = "0 4px 10px rgba(0,0,0,0.5)"
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.offsetHeight;
+
+        if(pageYOffset >= sectionTop){
+            current = section.getAttribute("id");
+        }
+
+    });
+
+    navLinks.forEach(link => {
+
+        link.classList.remove("active");
+
+        if(link.getAttribute("href") === "#" + current){
+            link.classList.add("active");
+        }
+
+    });
+
+});
+
+
+/* =========================
+   SCROLL REVEAL ANIMATION
+   ========================= */
+
+const revealSections = document.querySelectorAll(".section:not(.hero):not(#about)");
+
+function reveal() {
+
+    revealSections.forEach(section => {
+
+        const windowHeight = window.innerHeight;
+        const revealTop = section.getBoundingClientRect().top;
+
+        if(revealTop < windowHeight - 100){
+            section.classList.add("visible");
+        }
+
+    });
 
 }
-else{
 
-navbar.style.background = "transparent"
-navbar.style.boxShadow = "none"
-
-}
-
-})
+window.addEventListener("scroll", reveal);
+reveal();
 
 
+/* =========================
+   PORTFOLIO IMAGE LIGHTBOX
+   ========================= */
 
-/* IMAGE LIGHTBOX PREVIEW */
+const portfolioImages = document.querySelectorAll(".portfolio-pages img");
 
-const images = document.querySelectorAll(".portfolio-pages img")
+portfolioImages.forEach(img => {
 
-images.forEach(img => {
+    img.addEventListener("click", () => {
 
-img.addEventListener("click", () => {
+        const overlay = document.createElement("div");
+        overlay.style.position = "fixed";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100%";
+        overlay.style.height = "100%";
+        overlay.style.background = "rgba(0,0,0,0.9)";
+        overlay.style.display = "flex";
+        overlay.style.alignItems = "center";
+        overlay.style.justifyContent = "center";
+        overlay.style.zIndex = "9999";
 
-const overlay = document.createElement("div")
+        const fullImage = document.createElement("img");
+        fullImage.src = img.src;
+        fullImage.style.maxWidth = "90%";
+        fullImage.style.maxHeight = "90%";
+        fullImage.style.borderRadius = "8px";
 
-overlay.style.position = "fixed"
-overlay.style.top = "0"
-overlay.style.left = "0"
-overlay.style.width = "100%"
-overlay.style.height = "100%"
-overlay.style.background = "rgba(0,0,0,0.9)"
-overlay.style.display = "flex"
-overlay.style.alignItems = "center"
-overlay.style.justifyContent = "center"
-overlay.style.zIndex = "2000"
+        overlay.appendChild(fullImage);
+        document.body.appendChild(overlay);
 
-const fullImage = document.createElement("img")
+        overlay.addEventListener("click", () => {
+            overlay.remove();
+        });
 
-fullImage.src = img.src
-fullImage.style.maxWidth = "90%"
-fullImage.style.maxHeight = "90%"
-fullImage.style.borderRadius = "10px"
+    });
 
-overlay.appendChild(fullImage)
-
-document.body.appendChild(overlay)
-
-overlay.addEventListener("click", () => {
-
-overlay.remove()
-
-})
-
-})
-
-})
+});
