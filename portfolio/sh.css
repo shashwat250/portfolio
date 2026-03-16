@@ -1,0 +1,323 @@
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+line-height:1.6;
+}
+
+/* NAVBAR */
+
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 80px;
+background:#000;
+z-index:1000;
+border-bottom:1px solid #222;
+}
+
+ 
+/* HERO LAYOUT */
+
+.hero{
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+background-image:url("images/shashwat-mishra-profile.png");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+
+/* CONTAINER */
+
+.hero-container{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:120px;
+width:100%;
+max-width:1200px;
+}
+
+/* TEXT SIDE */
+
+.hero-text{
+flex:1;
+}
+
+.hero-text h1{
+font-size:90px;
+color:#4c5cff;
+margin:10px 0;
+position:relative;
+z-index:2;
+font-weight:700;
+letter-spacing:5px;
+}
+
+.hero-image img{
+transition:0.4s;
+}
+
+.hero-image img:hover{
+transform:scale(1.05);
+}
+
+.hero-btn{
+display:inline-block;
+margin-top:20px;
+padding:12px 30px;
+background:#4c5cff;
+color:white;
+text-decoration:none;
+border-radius:6px;
+transition:0.3s;
+}
+
+.hero-btn:hover{
+background:#2f3dd4;
+}
+
+
+
+/* .hero-text h1::before{
+content:"";
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:400px;
+height:200px;
+
+background:radial-gradient(circle,#4c5cff55,#00000000);
+
+filter:blur(60px);
+z-index:-1;
+} */
+
+/* IMAGE SIDE */
+
+.hero-image{
+flex:1;
+display:flex;
+justify-content:center;
+}
+
+.hero-image img{
+width:350px;
+height:350px;
+object-fit:cover;
+border-radius:50%;
+border:5px solid #4c5cff;
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+.logo span{
+color:#4c5cff;
+}
+
+nav a{
+color:white;
+margin-left:25px;
+text-decoration:none;
+font-size:15px;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#4c5cff;
+}
+
+/* GENERAL SECTION */
+
+.section{
+padding:120px 10%;
+min-height:100vh;
+}
+
+/* HERO */
+
+
+
+/* ABOUT */
+
+#about h3{
+margin-bottom:20px;
+color:#4c5cff;
+font-weight:500;
+}
+
+#about{
+background:#e8e2d5;
+color:#000;
+padding:120px 10%;
+background-image:url("images/bg.png");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+
+#about h2{
+font-size:36px;
+margin-bottom:30px;
+}
+
+#about p{
+max-width:800px;
+margin-bottom:20px;
+line-height:1.8;
+font-size:16px;
+}
+
+/* SKILLS */
+
+#skills{
+background:#1a1a1a;
+}
+
+#skills h2{
+margin-bottom:20px;
+}
+
+#skills ul{
+list-style:none;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+#skills li{
+background:#262626;
+padding:15px;
+border-radius:8px;
+text-align:center;
+transition:0.3s;
+}
+
+#skills li:hover{
+background:#4c5cff;
+}
+
+/* TOOLS */
+
+.tools{
+margin-top:40px;
+}
+
+.tools ul{
+list-style:none;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+margin-top:15px;
+}
+
+.tools li{
+background:#262626;
+padding:12px;
+border-radius:6px;
+text-align:center;
+}
+
+/* APPROACH */
+
+.approach{
+margin-top:40px;
+max-width:800px;
+}
+
+/* PORTFOLIO */
+
+#portfolio{
+background:#0d0d0d;
+text-align:center;
+}
+
+.portfolio-description{
+margin-bottom:50px;
+color:#aaa;
+}
+
+.portfolio-pages{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:60px;
+}
+
+.portfolio-pages img{
+width:90%;
+max-width:900px;
+border-radius:10px;
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+transition:0.4s;
+}
+
+.portfolio-pages img:hover{
+transform:scale(1.02);
+}
+
+/* CONTACT */
+
+.contact{
+text-align:center;
+background:#111;
+}
+
+.contact h2{
+margin-bottom:20px;
+font-size:32px;
+}
+
+.contact p{
+margin:5px 0;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.navbar{
+padding:20px 30px;
+flex-direction:column;
+gap:10px;
+}
+
+nav a{
+margin:0 10px;
+}
+
+.hero h1{
+font-size:50px;
+}
+
+.section{
+padding:100px 8%;
+}
+
+}
